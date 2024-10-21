@@ -1,19 +1,35 @@
-let globalVar = 10;
+function Lexical() {
+  let globalVar = 10; // private variable
 
-function addValue(x) {
-  return x + globalVar;
-}
+  // Function to add value to globalVar
+  function addValue(x) {
+    return x + globalVar;
+  }
 
-function multiplyByGlobal(y) {
-  return y * globalVar;
-}
+  // Function to multiply a value by globalVar
+  function multiplyByGlobal(y) {
+    return y * globalVar;
+  }
 
-function updateGlobal(newValue) {
-  globalVar = newValue;
+  // Function to update globalVar
+  function updateGlobal(newValue) {
+    globalVar = newValue;
+  }
+
+  // Expose the methods that can access globalVar
+  return {
+    addValue,
+    multiplyByGlobal,
+    updateGlobal
+  };
 }
 
 // Example usage
-console.log(addValue(5)); // Output: 15
-console.log(multiplyByGlobal(2)); // Output: 20
-updateGlobal(5);
-console.log(addValue(5)); // Output: 10
+const lexicalFunctions = Lexical();  // Create an instance of the Lexical function
+
+console.log(lexicalFunctions.addValue(5));          // Output: 15
+console.log(lexicalFunctions.multiplyByGlobal(2));  // Output: 20
+
+lexicalFunctions.updateGlobal(5);                   // Update globalVar to 5
+
+console.log(lexicalFunctions.addValue(5));          // Output: 10
